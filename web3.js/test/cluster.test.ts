@@ -1,6 +1,6 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
-import {clusterApiUrl} from '../src/util/cluster';
+import { clusterApiUrl } from '../src/util/cluster';
 
 describe('Cluster Util', () => {
   it('invalid', () => {
@@ -18,5 +18,12 @@ describe('Cluster Util', () => {
     expect(clusterApiUrl('devnet', false)).to.eq(
       'http://api.devnet.solana.com',
     );
+  });
+
+  it('localhost', () => {
+    expect(clusterApiUrl('localhost')).to.eq('https://localhost:8899');
+    expect(clusterApiUrl('localhost', true)).to.eq('https://localhost:8899');
+    expect(clusterApiUrl('localhost', false)).to.eq('http://localhost:8899');
+    expect(clusterApiUrl('localhost', false, '7777')).to.eq('http://localhost:7777');
   });
 });
